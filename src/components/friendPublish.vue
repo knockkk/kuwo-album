@@ -1,6 +1,6 @@
 <template>
   <div id="friend-publish">
-    <h1>好友动态</h1>
+    <h1>????</h1>
   </div>
 </template>
 
