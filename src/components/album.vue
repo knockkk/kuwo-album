@@ -1,6 +1,6 @@
 <template>
-  <div id="friend-publish">
-    <h1>好友动态</h1>
+  <div id="album">
+    <h1>我的相册</h1>
   </div>
 </template>
 
