@@ -6,27 +6,30 @@
           default-active="1"
           class="el-menu-demo"
           mode="horizontal"
-          @select="handleSelect"
           background-color="#545c64"
           text-color="#fff"
           active-text-color="#ffd04b"
           router
           style="position:relative"
-        >  <img src="../assets/logo.png" class="title-img">
+        >
+          <img src="../assets/logo.png" class="title-img">
           <el-menu-item :index="Url.indexPage" style="margin-left:120px">首页</el-menu-item>
-          <el-submenu>
-            <template index="2" slot="title"><span style="font-size: 16px;">好友</span></template>
+          <el-submenu index>
+            <template index="2" slot="title">
+              <span style="font-size: 16px;">好友</span>
+            </template>
             <el-menu-item :index="Url.friendPublish">好友动态</el-menu-item>
             <el-menu-item :index="Url.friendList">好友列表</el-menu-item>
           </el-submenu>
 
-          <el-menu-item :index="Url.publish">发布</el-menu-item>
+          <el-menu-item :index="Url.album">我的相册</el-menu-item>
+          <el-menu-item :index="Url.publish">上传图片</el-menu-item>
           <!-- <el-menu-item style="margin-left:5%">搜索</el-menu-item> -->
           <el-menu-item :index="Url.loginPage" class="loginButton">登录</el-menu-item>
         </el-menu>
       </el-header>
 
-      <!-- 首页下方主要内容 -->
+      <!-- 路由出口 -->
       <router-view></router-view>
     </el-container>
   </div>
@@ -41,9 +44,6 @@ export default {
     };
   },
   methods: {
-    handleSelect(key, keyPath) {
-      // console.log(key, keyPath);
-    }
   }
 };
 </script>
@@ -52,7 +52,6 @@ export default {
 .el-menu {
   background: none;
   padding: 5px 0;
-  
 }
 .el-menu.el-menu--horizontal {
   border: none;
@@ -71,7 +70,6 @@ export default {
   left: -30px;
   transform: scale(0.3);
   z-index: 9999;
-  /* display: inline-block; */
 }
 .el-header {
   padding: 0;

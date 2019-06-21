@@ -11,7 +11,7 @@
     </el-form-item>
     <el-form-item>
     <el-link type="primary" style="margin-right:20px">忘记密码</el-link>
-   <el-link type="primary">注册</el-link>
+   <el-link type="primary" @click="registerClick">注册</el-link>
    </el-form-item>
     
     <el-form-item style="width:100%;">
@@ -45,9 +45,9 @@ export default {
        
     },
     methods: {
-        loginClick() {
+        registerClick() {
              console.log("login")
-             this.$router.push(Url.loginPage);
+             this.$router.push(Url.register);
         }
     }
 }
