@@ -1,6 +1,7 @@
 let Url = {
     //front-end 前端路由路径
     loginPage: '/login', //登录
+    register: '/register', //注册
     indexPage: '/index', //首页
     indexRecommend:'/index/recommend', //首页推荐
     indexRecommendType: '/index/recommend/type/:id', //首页推荐-类别

@@ -4,6 +4,7 @@ import { Url } from '../config/index';
 
 import mainContainer from '../components/mainContainer';
 import login from '../components/login';
+import register from '../components/register';
 import index from '../components/index';
 import indexRecommend from '../components/indexRecommend';
 import  indexRecommendType from '../components/indexRecommendType';
@@ -71,6 +72,10 @@ export default new Router ({
 				{
 					path: Url.loginPage,
 					component: login
+				},
+				{
+					path: Url.register,
+					component: register
 				},
 				{
 					path: Url.publish,

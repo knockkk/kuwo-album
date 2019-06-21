@@ -1,7 +1,7 @@
 <template>
     <div>
         <h1>Welcome to kuwoAlbum</h1>
-        <el-button @click="loginClick">登录</el-button>
+        <el-button @click="registerClick">登录</el-button>
     </div>
 </template>
 
@@ -14,9 +14,9 @@ export default {
         }
     },
     methods: {
-        loginClick() {
+        registerClick() {
              console.log("login")
-             this.$router.push(Url.indexPage);
+             this.$router.push(Url.register);
         }
     }
 }
