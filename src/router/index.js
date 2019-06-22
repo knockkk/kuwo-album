@@ -27,29 +27,33 @@ export default new Router ({
 				keepAlive: true
 			},
 			//重定向
-            redirect: Url.indexRecommendSelect,
+            redirect: Url.indexRecommend,
 			component: mainContainer,
 			children: [
 				{
 					path: Url.indexPage,
 					component: index,
-					redirect: Url.indexRecommendSelect,
+					redirect: Url.indexRecommend,
 					children:[
 						{
 							path: Url.indexRecommend,
 							component: indexRecommend,
-							redirect: Url.indexRecommendSelect,
-							children: [
-								{
-									path: Url.indexRecommendType,
-									name: 'indexRecommendType',
-									component: indexRecommendType
-								},
-								{
-									path: Url.indexRecommendSelect,
-									component: indexRecommendSelect
-								}
-							]
+							// children: [
+							// 	{
+							// 		path: Url.indexRecommendType,
+							// 		name: 'indexRecommendType',
+							// 		component: indexRecommendType
+							// 	},
+							// 	{
+							// 		path: Url.indexRecommendSelect,
+							// 		component: indexRecommendSelect
+							// 	}
+							// ]
+						},
+						{
+							path: Url.indexRecommendType,
+							name: 'indexRecommendType',
+							component: indexRecommendType
 						},
 						{
 							path: Url.indexPopular,

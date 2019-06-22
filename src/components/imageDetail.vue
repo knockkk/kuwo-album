@@ -18,12 +18,12 @@
 
         <div class="detailBox work">
           <div class="textFont" style="margin-bottom:15px">{{detail.text}}</div>
-          <div class="flex-row-item-center">
+          <div class="flex-row-item-center" style="color:#8d8d8d">
+            <small style="margin: 0 20px 2px 0">#{{detail.type}}</small>
             <small>
               <img src="../assets/like.png" alt="喜欢" class="likeIcon">
               {{detail.like}}
             </small>
-            <small style="margin:0 20px">{{detail.time}}</small>
           </div>
         </div>
 
@@ -174,7 +174,7 @@ export default {
 }
 .commentBottom {
   background-color: #fdfefe;
-  padding: 10px 150px;
+  padding: 10px 12%;
   margin: 20px 0;
 }
 .labelFont {

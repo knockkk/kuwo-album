@@ -1,6 +1,6 @@
 <template>
   <div id="friend-list">
-    <h1>å¥½å�‹åˆ—è¡¨</h1>
+    <h1>好友列表</h1>
   </div>
 </template>
 
