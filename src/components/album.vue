@@ -1,24 +1,25 @@
 <template>
   <div id="album" class="container">
     <el-menu
+      :default-active="$route.path"
       class="el-menu-demo"
       mode="horizontal"
-      background-color="#f4f6f9"
+      background-color="#fff"
       text-color="#000"
       active-text-color="#f7b90a"
       style="margin-top:0px;text-align:center;"
+      router
     >
-      <el-menu-item :index="Url.albumManagent">
+      <el-menu-item :index="Url.albumManagement">
         <span style="font-size: 17px;">相册管理</span>
       </el-menu-item>
       <el-submenu index>
         <template slot="title">
-          <span style="font-size: 17px;">智能排序</span>
+          <span style="font-size: 17px;">{{sort}}</span>
         </template>
-        <el-menu-item :index="Url.albumSort">已发布</el-menu-item>
-        <el-menu-item index="2">未发布</el-menu-item>
-        <el-menu-item index="3">按发布时间排序</el-menu-item>
-        <el-menu-item index="4">按点赞数排序</el-menu-item>
+        <el-menu-item :index="`/album/albumSort/${1}`" @click="sort='已发布'">已发布</el-menu-item>
+        <el-menu-item :index="`/album/albumSort/${2}`" @click="sort='未发布'">未发布</el-menu-item>
+        <el-menu-item :index="`/album/albumSort/${3}`" @click="sort='按点赞数排序'">按点赞数排序</el-menu-item>
       </el-submenu>
     </el-menu>
 
@@ -33,24 +34,18 @@ export default {
   data() {
     return {
       album: "",
+      sort:"智能排序",
       Url: Url
     };
   },
   mounted() {
-    this.album = [
-      {
-        albumName: "我的相册",
-        albumId: "12",
-        image: require("../assets/5.jpg")
-      },
-      {
-        albumName: "自拍",
-        albumId: "11sda",
-        image: require("../assets/7.jpg")
-      }
-    ];
+   
   },
-  methods: {}
+  methods: {
+    sortClick(type){
+      console.log(type,"cick")
+    }
+  }
 };
 </script>
 

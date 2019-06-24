@@ -3,6 +3,7 @@
     <el-container>
       <el-header style="height:70px">
         <el-menu
+        :default-active="$route.path"
           mode="horizontal"
           background-color="#545c64"
           text-color="#fff"
