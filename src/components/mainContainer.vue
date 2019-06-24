@@ -3,6 +3,7 @@
     <el-container>
       <el-header style="height:70px">
         <el-menu
+        :default-active="$route.path"
           mode="horizontal"
           background-color="#545c64"
           text-color="#fff"
@@ -11,7 +12,7 @@
           style="position:relative"
         >
           <img src="../assets/logo.png" class="title-img">
-          <el-menu-item :index="Url.indexPage" style="margin-left:120px">首页</el-menu-item>
+          <el-menu-item :index="Url.indexPage" style="margin-left:200px">首页</el-menu-item>
           <el-submenu index>
             <template index="2" slot="title">
               <span style="font-size: 16px;">好友</span>
@@ -63,9 +64,9 @@ export default {
 }
 .title-img {
   position: absolute;
-  top: -65px;
-  left: -30px;
-  transform: scale(0.3);
+  top: -42px;
+  left: -150px;
+  transform: scale(0.22);
   z-index: 9999;
 }
 .el-header {

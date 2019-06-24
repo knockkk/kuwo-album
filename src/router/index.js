@@ -19,6 +19,7 @@ import album from "../components/album";
 import albumManagement from "../components/albumManagement";
 import albumSort from "../components/albumSort";
 import findPassword from "../components/findPassword";
+import albumImages from "../components/albumImages";
 Vue.use(Router);
 export default new Router({
   routes: [
@@ -103,24 +104,13 @@ export default new Router({
               component: albumSort
             }
           ]
-        }
+        },
+        {
+          path: Url.albumImages,
+          name: "albumImages",
+          component: albumImages
+        },
       ]
     }
-    // {
-    // 	path: '/' + Url.indexPage,
-    // 	name: Url.indexPage,
-    // 	meta: {
-    // 		keepAlive: true
-    // 	},
-    // 	component: index
-    // },
-    // {
-    // 	path: '/',
-    // 	name: Url.loginPage,
-    // 	meta: {
-    // 		keepAlive: true
-    // 	},
-    // 	component: login
-    // },
   ]
 });
