@@ -1,3 +1,4 @@
+let baseUrl = 'http://192.168.137.1:8000'
 let Url = {
     //front-end 前端路由路径
     loginPage: '/login', //登录
@@ -14,10 +15,16 @@ let Url = {
     search: '/search', //搜素
     imageDetail: '/detail/:id', //图片详情
     album: '/album', //我的相册
+    albumManagement: '/album/albumManagement',
+    albumSort: '/album/albumSort',
+    findPassword: '/findPassword',
 
+    //back-end
+    getIndexImage: baseUrl + '/album/api/v1/popular',
 }
 
-let imageTypeList = ['人像','风景','宠物','生活','纪实','自然','航拍','潜水','其他']
+const imageTypeList = ['人像','风景','宠物','生活','纪实','自然','航拍','潜水','其他']
+
 
 export {
     Url,

@@ -3,8 +3,6 @@
     <el-container>
       <el-header style="height:70px">
         <el-menu
-          default-active="1"
-          class="el-menu-demo"
           mode="horizontal"
           background-color="#545c64"
           text-color="#fff"
@@ -24,7 +22,6 @@
 
           <el-menu-item :index="Url.album">我的相册</el-menu-item>
           <el-menu-item :index="Url.publish">上传图片</el-menu-item>
-          <!-- <el-menu-item style="margin-left:5%">搜索</el-menu-item> -->
           <el-menu-item :index="Url.loginPage" class="loginButton">登录</el-menu-item>
         </el-menu>
       </el-header>

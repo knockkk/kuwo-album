@@ -1,5 +1,6 @@
 
 <template>
+<<<<<<< HEAD
 <div>
    <el-button type="primary" class="button-group" @click="changeStatus()">管理分组</el-button>
   <i class=" el-icon-circle-plus-outline" style="font-size:25px;color:red;  position: absolute;
@@ -44,6 +45,10 @@
       </template>
     </el-collapse-item>
   </el-collapse>
+=======
+  <div id="friend-list">
+    <h1>好友列表</h1>
+>>>>>>> dev
   </div>
 
 </template>
