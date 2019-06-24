@@ -47,7 +47,7 @@ import { Url } from '../config/index';
 export default {
     data() {
         return {
-        showBackPassword:false,
+        showBackPassword:true,
         formData: {
           account: '',
           checkPass: ''
