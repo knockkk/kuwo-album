@@ -11,13 +11,9 @@
     <el-form-item prop="password">
       <el-input type="password" v-model="formData.password" placeholder="密码"></el-input>
     </el-form-item>
-       <el-form-item >
-      <el-input type="password"  placeholder=""></el-input>
-    </el-form-item>
-
-    
+  
     <el-form-item style="width:100%;">
-      <el-button type="primary"  style="width:100%;">登录</el-button>
+      <el-button type="primary"  style="width:100%;">注册</el-button>
     </el-form-item>
 
   </el-form>
@@ -71,7 +67,7 @@ export default {
     padding: 35px 35px 15px 35px;
     background: #fff;
     border: 1px solid #eaeaea;
-    box-shadow: 0 0 15px #cac6c6;
+    box-shadow: 0 0 5px #cac6c6;
     }
     .title {
       margin: 0px auto 40px auto;
@@ -81,11 +77,7 @@ export default {
   .remember {
       margin: 0px 0px 35px 0px;
     }
-    .right {
-    position: absolute;
-    right: 0px;
-    
-}
+
   
 
 
