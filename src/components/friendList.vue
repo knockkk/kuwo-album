@@ -4,6 +4,10 @@
    <el-button type="primary" class="button-group" @click="changeStatus()">管理分组</el-button>
   <i class=" el-icon-circle-plus-outline" style="font-size:25px;color:red;  position: absolute;
  margin: 110px 820px; " v-if="showDeleteicon" ></i>
+ <!-- <div class="flex-row">
+            <img :src="detail.avaterImg" alt="头像" class="avatar-img">
+            <div class="nickname-font" style="margin-left:10px">{{detail.nickname}}</div>
+          </div> -->
   <el-collapse accordion class="demo-ruleForm collapse-container">
     <el-collapse-item>
       <template slot="title">
