@@ -2,7 +2,7 @@
   <el-main style="cursor:pointer;">
     <!-- 图片标签选择 -->
     <div style="padding-left:20px">
-      <el-dropdown @command="handleCommand" style="font-size:17px; color:#000">
+      <el-dropdown @command="handleCommand" style="font-size:16px; color:#000;">
         <span class="el-dropdown-link">
           {{imageTypeList[imageTypeId-1]}}
           <i class="el-icon-arrow-down el-icon--right"></i>
@@ -23,7 +23,12 @@
       style="position:relative; display:inline-block"
       @click="imageClick(index+1)"
     >
-      <img :src="item" alt="image" class="displayImg">
+      <div style="position:relative">
+        <img :src="item" alt="image" class="displayImg">
+        <div class="testout">
+          <div class="testin">118人喜欢</div>
+        </div>
+      </div>
       <!-- <span class="typeText">{{item.type}}</span> -->
     </div>
   </el-main>
@@ -88,6 +93,29 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.testout {
+  opacity: 0;
+  width:100%;
+  height: 100%;
+  position: absolute;
+  right:0;
+  top: 0;
+  transition: opacity 0.5s;
+}
+.testout:hover {
+  opacity: 1.0;
+}
+.testin {
+  position: absolute;
+  left: 30px;
+  top: 30px;
+  font-size: 0.9em;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.3);
+  padding: 3px 6px;
+}
+
+
 .el-main {
   padding: 0 100px;
 }
