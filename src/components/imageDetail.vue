@@ -161,7 +161,7 @@ export default {
   cursor: pointer;
 }
 .followBtn:hover {
-  background-color: #8d8d8d;
+  opacity: 0.7;
 }
 /*  */
 .textFont {

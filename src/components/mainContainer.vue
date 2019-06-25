@@ -11,7 +11,7 @@
           router
           style="position:relative"
         >
-          <img src="../assets/logo.png" class="title-img">
+          <img src="../assets/logo.png" class="logoImg" @click="logoClick">
           <el-menu-item :index="Url.indexPage" style="margin-left:200px">首页</el-menu-item>
           <el-submenu index>
             <template index="2" slot="title">
@@ -36,6 +36,7 @@
             <i class="el-icon-search" style="color:#fff;" @click="searchClick"></i>
           </div>
 
+          <!-- 使用el-menu-item -->
           <!-- <el-menu-item class="searchBox">
             <div  style="border:none">
               <el-input
@@ -86,6 +87,10 @@ export default {
         this.inputContent = ""
       }
       this.searchClickTime = clickTime;
+    },
+    /* logo点击跳转首页 */
+    logoClick() {
+       this.$router.push(Url.indexPage);
     }
   }
 };
@@ -117,12 +122,13 @@ export default {
   position: absolute;
   right: 40px;
 }
-.title-img {
+.logoImg {
   position: absolute;
   top: -42px;
   left: -150px;
   transform: scale(0.22);
   z-index: 9999;
+  cursor: pointer;
 }
 .el-header {
   padding: 0;

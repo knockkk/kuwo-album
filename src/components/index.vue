@@ -29,11 +29,8 @@ export default {
     };
   },
   created(){
-    // console.log("index created")
     let route = [Url.indexRecommend, Url.indexPopular, Url.indexLatest];
     let path = this.$route.path;
-    // console.log(path);
-    // console.log(route.indexOf(path));
     let pos = route.indexOf(path);
     this.tabValue = pos >= 0? pos + 1 : 1;
   },

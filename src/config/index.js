@@ -15,11 +15,14 @@ let Url = {
   search: "/search/:content", //搜素
   imageDetail: "/detail/:id", //图片详情
   album: "/album", //我的相册
-  albumImages: '/album/:id',
-  albumManagement: "/album/albumManagement",
-  albumSort: "/album/albumSort/:type",
-  findPassword: "/findPassword",
-
+  albumImages: '/album/:id', //某相册类图片
+  albumManagement: "/album/albumManagement", //相册管理
+  albumSort: "/album/albumSort/:type", //相册智能排序
+  findPassword: "/findPassword", //找回密码
+  edit: "/user/edit", //编辑
+  editProfile: "/user/editProfile", //编辑
+  editPassword: "/user/editPassword", //修改密码
+  editComment: "/user/editComment", //编辑评论
   //back-end
   getIndexImage: baseUrl + "/album/api/v1/popular"
 };

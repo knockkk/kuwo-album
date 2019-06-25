@@ -23,13 +23,21 @@
       style="position:relative; display:inline-block"
       @click="imageClick(index+1)"
     >
-      <img :src="item" alt="image" class="displayImg">
-      <!-- <div style="position:relative">
+      <!-- <img :src="item" alt="image" class="displayImg"> -->
+      <div style="position:relative">
         <img :src="item" alt="image" class="displayImg">
-        <div class="testout">
-          <div class="testin">118人喜欢</div>
+        <div class="out">
+          <div class="userBox flex-row">
+            <img src="../assets/4.jpg" alt="头像" class="avatarImg">
+            <div style="color:#fff; font-size:0.9em">白日梦</div>
+          </div>
+
+          <span class="likeText">
+            <img src="../assets/like.png" alt="喜欢" class="likeIcon">
+            12
+          </span>
         </div>
-      </div>-->
+      </div>
     </div>
   </el-main>
 </template>
@@ -93,28 +101,6 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.testout {
-  opacity: 0;
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  right: 0;
-  top: 0;
-  transition: opacity 0.5s;
-}
-.testout:hover {
-  opacity: 1;
-}
-.testin {
-  position: absolute;
-  left: 30px;
-  top: 30px;
-  font-size: 0.9em;
-  color: #fff;
-  background: rgba(0, 0, 0, 0.3);
-  padding: 3px 6px;
-}
-
 .el-main {
   padding: 0 100px;
 }
@@ -130,5 +116,47 @@ export default {
   font-size: 0.9em;
   background: rgba(0, 0, 0, 0.3);
   padding: 3px 6px;
+}
+
+
+/* hover时出现补充信息 */
+.out {
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  right: 0;
+  top: 0;
+  transition: opacity 1s;
+}
+.out:hover {
+  opacity: 1;
+}
+
+/* hover时出现 */
+.userBox {
+  position: absolute;
+  left: 30px;
+  bottom: 30px;
+}
+
+.avatarImg {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  margin-right: 5px;
+}
+.likeText {
+  position: absolute;
+  right: 30px;
+  bottom: 30px;
+  color: #fff;
+  font-size: 0.9em;
+  background: rgba(0, 0, 0, 0.3);
+  padding: 3px 6px;
+}
+.likeIcon {
+  width: 15px;
+  height: 15px;
 }
 </style>

@@ -133,4 +133,7 @@ export default {
   display: inline-block;
   text-align: center;
 }
+.editItem:hover {
+  background: rgba(128, 126, 126, 0.8);
+}
 </style>

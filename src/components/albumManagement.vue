@@ -93,7 +93,7 @@ export default {
   position: absolute;
   bottom: 0;
   right: 0;
-  transition: opacity 0.5s;
+  transition: opacity 1s;
   color: #fff;
   font-size: 0.9em;
 }
@@ -114,6 +114,9 @@ export default {
   box-sizing: border-box;
   display: inline-block;
   text-align: center;
+}
+.editItem:hover {
+  background: rgba(128, 126, 126, 0.8);
 }
 
 .add {

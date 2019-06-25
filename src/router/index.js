@@ -20,6 +20,10 @@ import albumManagement from "../components/albumManagement";
 import albumSort from "../components/albumSort";
 import findPassword from "../components/findPassword";
 import albumImages from "../components/albumImages";
+import edit from "../components/edit";
+import editProfile from "../components/editProfile";
+import editPassword from "../components/editPassword";
+import editComment from "../components/editComment";
 Vue.use(Router);
 export default new Router({
   routes: [
@@ -111,6 +115,26 @@ export default new Router({
           path: Url.findPassword,
           component: findPassword
         },
+        /* 个人信息 */
+        {
+          path: Url.edit,
+          component: edit,
+          redirect: Url.editProfile,
+          children: [
+            {
+              path: Url.editProfile,
+              component: editProfile
+            },
+            {
+              path: Url.editPassword,
+              component: editPassword
+            },
+            {
+              path: Url.editComment,
+              component: editComment
+            },
+          ]
+        }
       ]
     }
   ]

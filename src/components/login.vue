@@ -6,7 +6,6 @@
       :rules="rules"
       ref="formData"
       label-position="left"
-      label-width="0px"
       class="demo-ruleForm login-container"
     >
       <h3 class="title">Cool Wow Album</h3>
@@ -23,7 +22,7 @@
       </el-form-item>
 
       <el-form-item style="width:100%;">
-        <el-button type="primary" style="width:100%;">登录</el-button>
+        <el-button type="primary" style="width:100%;" @click="loginClick">登录</el-button>
       </el-form-item>
     </el-form>
   </div>
@@ -51,6 +50,9 @@ export default {
     },
     forgetClick() {
       this.$router.push(Url.findPassword);
+    },
+    loginClick() {
+       this.$router.push(Url.edit);
     }
   }
 };

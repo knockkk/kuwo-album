@@ -1,91 +1,54 @@
 <template>
-<div class="container">
-    <div>
-<img src="../assets/1.jpg" class="image">
+  <div id="edit-profile" class="container">
+    <div style="font-size:1.3em; font-weight:bold;margin:30px 0 20px 0">个人资料</div>
 
-<el-menu
-  :default-active="activeIndex2"
-  class="el-menu-demo"
-  mode="horizontal"
-  @select="handleSelect"
-  background-color="#545c64"
-  text-color="#fff"
-  active-text-color="#ffd04b">
-  <el-menu-item index="1"  style="margin-left:580px" @click="changeStatus1()">个人资料</el-menu-item>
-  
-    
-    
-      <el-menu-item index="2" @click="changeStatus2()">评论</el-menu-item>
-      <el-menu-item index="3" @click="changeStatus3()">修改密码</el-menu-item>
-     
-  
-</el-menu>
+    <div class="profileBox">
+      <div style="width:60%;margin-right:17%">
+        <label style="font-size:16px;line-height:40px">昵称</label>
+        <el-input></el-input>
+        <label style="font-size:16px;line-height:40px">邮箱</label>
+        <el-input></el-input>
+      </div>
+
+      <div class="flex-col" style="max-width:30%">
+        <img src="../assets/4.jpg" alt="avatar" class="avatarImg">
+        <el-button type="success" plain style="height:35px;padding:0">上传头像</el-button>
+      </div>
     </div>
-  
-    <div class="box1" >
-     
-        <el-form  label-position="left" label-width:5px class="demo-ruleForm login-container">
-    <h4>个人资料</h4>
-    <el-form-item label="昵称" style="margin-bottom:0px ！important;">
-      </el-form-item>
-    <el-form-item >
-     
-      <el-input   ></el-input>
-    </el-form-item>
-     <el-form-item label="邮箱" >
-      </el-form-item>
-    <el-form-item >
-      <el-input ></el-input>
-    </el-form-item>
-    </el-form>
-    <div style="margin: 50px 100px"><img src="../assets/2.jpg" class="image1"><h3 style="text-align:center">上传头像</h3></div>
-       </div>
-   
-</div>
-
+    <el-button  type="info" class="confirmBtn">确认修改</el-button>
+  </div>
 </template>
 <script>
 export default {
-   data() {
-        return {
-            
-        }
-       
-    },
-    methods: {
-      
-  
-    }
+  data() {
+    return {};
+  },
+  methods: {}
 };
 </script>
 <style scoped>
-.image {
-  width: 1650px;
-  height: 280px;
-  
+.container {
+  padding: 0 30% 250px 30%;
 }
-.box1{
- display: flex;
- margin: 20px 0px 0px 500px
+.confirmBtn {
+  background-color: #545c64;
+  border:#545c64;
+  width:150px;
+  margin-top:50px;
 }
-.collapse-container {
-  /*box-shadow: 0 0px 8px 0 rgba(0, 0, 0, 0.06), 0 1px 0px 0 rgba(0, 0, 0, 0.02);*/
-
-  
-
-  margin-right: 200px;
-  width: 700px;
-
-margin-bottom:0px;
-
-  background: #fff;
+/* .confirmBtn:hover {
+  opacity: 0.8;
+} */
+.avatarImg {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin-bottom: 15px;
+  margin-top:10px;
 }
-.lable{
-  width:100px  !important;
-}
-.image1 {
-  width: 70px;
-  height: 70px;
-  border-radius:70%;
+.profileBox {
+  display: flex;
+  flex-direction: row;
+  /* justify-content: space-between; */
 }
 </style>
