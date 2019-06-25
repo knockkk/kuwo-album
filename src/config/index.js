@@ -12,7 +12,7 @@ let Url = {
   friendPublish: "/friend/publish", //好友动态
   friendList: "/friend/list", //好友列表
   publish: "/publish", //发布
-  search: "/search", //搜素
+  search: "/search/:content", //搜素
   imageDetail: "/detail/:id", //图片详情
   album: "/album", //我的相册
   albumImages: '/album/:id',

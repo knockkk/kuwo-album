@@ -3,7 +3,7 @@
     <el-container>
       <el-header style="height:70px">
         <el-menu
-        :default-active="$route.path"
+          :default-active="$route.path"
           mode="horizontal"
           background-color="#545c64"
           text-color="#fff"
@@ -23,6 +23,31 @@
 
           <el-menu-item :index="Url.album">我的相册</el-menu-item>
           <el-menu-item :index="Url.publish">上传图片</el-menu-item>
+
+          <div class="searchBox" style="border:none">
+            <el-input
+              v-if="searchClickTime === 1"
+              v-model="inputContent"
+              placeholder="输入用户名称"
+              style="margin-right:20px"
+              autofocus
+            ></el-input>
+            <i class="el-icon-search" style="color:#fff;" @click="searchClick"></i>
+          </div>
+
+          <!-- <el-menu-item class="searchBox">
+            <div  style="border:none">
+              <el-input
+                v-if="searchClickTime === 1"
+                v-model="inputContent"
+                placeholder="输入用户名称"
+                style="margin-right:20px"
+                autofocus
+              ></el-input>
+              <i class="el-icon-search" style="color:#fff;" @click="searchClick"></i>
+            </div>
+          </el-menu-item> -->
+
           <el-menu-item :index="Url.loginPage" class="loginButton">登录</el-menu-item>
         </el-menu>
       </el-header>
@@ -38,10 +63,23 @@ import { Url } from "../config/index";
 export default {
   data() {
     return {
-      Url: Url
+      Url: Url,
+      inputContent: "",
+      searchClickTime: 0
     };
   },
   methods: {
+    /* 键盘enter跳转实现？ */
+    searchClick() {
+      let clickTime = this.searchClickTime;
+      clickTime = clickTime + 1;
+      if (clickTime === 2) {
+        //点击两次跳转
+        /* 跳转路由 */
+        clickTime = 0;
+      }
+      this.searchClickTime = clickTime;
+    }
   }
 };
 </script>
@@ -58,9 +96,19 @@ export default {
   font-size: 16px;
 }
 
+.searchBox {
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  position: absolute;
+  right: 130px;
+  height: 88%;
+}
+
 .loginButton {
   position: absolute;
-  right: 20px;
+  right: 40px;
 }
 .title-img {
   position: absolute;

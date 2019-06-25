@@ -85,19 +85,23 @@ export default {
 <style scoped>
 .container {
   background-color: #f4f6f9;
-  padding: 0 5%;
+  padding: 0 7%;
 }
 .itemBox {
   display: inline-block;
   background-color: #fff;
-  margin: 20px 20px 0 0;
+  margin: 15px 1.5%;
   cursor: pointer;
+   max-width: 30%;
 }
 .image {
   object-fit: cover;
   height: 240px;
   width: 400px;
+  max-width: 100%;
 }
+
+
 
 /* 编辑框 */
 .editOut {

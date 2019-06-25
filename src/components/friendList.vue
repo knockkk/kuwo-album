@@ -1,139 +1,158 @@
 
 <template>
-<div class="container">
+  <div class="container">
+    <div style="text-align:right" @click.self="showGroupManage=false">
+      <el-button v-if="showGroupManage">新建分组</el-button>
+      <el-button type="primary" style="width:120px" @click.stop="changeStatus()">管理分组</el-button>
+    </div>
 
-  <div>
-   <el-button type="primary" class="button-group" @click="changeStatus()">管理分组</el-button>
-  <i class=" el-icon-circle-plus-outline" style="font-size:25px;color:red;  position: absolute;
- margin: 110px 820px; " v-if="showDeleteicon" ></i>
- </div>
- <div class="box3">
-  <div class="collapse-container">         
-  <el-collapse accordion v-model="activeName" >
-    <el-collapse-item name="1">
-      <template slot="title">
-        <i class="el-icon-remove" style="width:30px;font-size:18px;color:red" v-if="showDeleteicon" ></i>
-        <h3>我的好友</h3>   
-       
-      </template>
-    <br><el-button type="danger" class="button-delet" icon="el-icon-remove-outline">删除好友</el-button><br><br>
-    
-    <div class="box"><span><img src="../assets/1.jpg" class="image"><br><h3>养花爱好者</h3></span></div>
-     <div class="box"><span><img src="../assets/2.jpg" class="image"><br><h3>我爱摄影</h3></span></div>
-     <div class="box"><span><img src="../assets/9.jpg" class="image"><br><h3>人生语录</h3></span></div>
-     <div class="box"><span><img src="../assets/6.jpg" class="image"><br><h3>有始无终</h3></span></div>
-     <div class="box"><span><img src="../assets/5.jpg" class="image"><br><h3>棒啊bng</h3></span></div>
-     <div class="box"><span><img src="../assets/3.jpg" class="image"><br><h3>Apple watch</h3></span></div>
-     
+    <el-collapse accordion v-model="activeName" style="margin-top:20px">
+      <el-collapse-item v-for="(item,index) in groupList" :key="index" :name="index">
+        <template slot="title">
+          <i
+            class="el-icon-remove"
+            style="margin-right:10px;font-size:18px;color:red"
+            v-if="showGroupManage && index!=0"
+          ></i>
+          <i
+            class="el-icon-s-tools"
+            style="margin-right:10px;font-size:18px;"
+            v-if="showGroupManage && index==0"
+          ></i>
+          <div style="font-size:1.4em; font-weight:bold;margin:20px 0">{{item.groupName}}</div>
+        </template>
+
+        <div v-for="(item,index) in groupFriendList" :key="index" class="avatarBox">
+          <div style="position:relative">
+            <img :src="item.avatarImg" alt="avatar" class="avatarImg">
+            <div class="editOut">
+              <i class="el-icon-delete"></i>
+            </div>
+          </div>
+
+          <div class="nickname">{{item.nickname}}</div>
+        </div>
       </el-collapse-item>
-    <el-collapse-item  >
-      <template slot="title">
-        <i class="el-icon-remove" style="width:30px;font-size:18px;color:red" v-if="showDeleteicon"></i>
-        <h3>自定义分组1</h3>   
-      </template>
-    </el-collapse-item>
-  <el-collapse-item  >
-      <template slot="title">
-        <i class="el-icon-remove" style="width:30px;font-size:18px;color:red" v-if="showDeleteicon"></i>
-        <h3>自定义分组2</h3>   
-      </template>
-    </el-collapse-item>
-      <el-collapse-item  >
-      <template slot="title">
-        <i class="el-icon-remove" style="width:30px;font-size:18px;color:red" v-if="showDeleteicon"></i>
-        <h3>自定义分组3</h3>   
-      </template>
-    </el-collapse-item>
-  </el-collapse>
-  </div>
-   <div class="box2"><img src="../assets/9.jpg" class="image2">   <h3 style="margin: 130px 0px 0px 0px">养花爱好者</h3></div>
-  </div>
+    </el-collapse>
   </div>
 </template>
 
 <script>
 export default {
-   data() {
-        return {
-          activeName: '1',
-          showDeleteicon:false
-        }
-       
-    },
-    methods: {
-      
-    changeStatus(){
-            
-              this.showDeleteicon= !this.showDeleteicon;
-
+  data() {
+    return {
+      activeName: 0 /* collapse组件绑定展开项 */,
+      showGroupManage: false /* 展示管理分组 */,
+      groupList: [],
+      groupFriendList: []
+    };
+  },
+  mounted() {
+    this.groupList = [
+      {
+        groupName: "我的好友",
+        groupId: "233",
+        count: 18
+      },
+      {
+        groupName: "拍照达人",
+        groupId: "23",
+        count: 9
+      }
+    ];
+    this.groupFriendList = [
+      {
+        userId: "12",
+        avatarImg: require("../assets/3.jpg"),
+        nickname: "王大锤"
+      },
+      {
+        userId: "12",
+        avatarImg: require("../assets/4.jpg"),
+        nickname: "王大锤"
+      },
+      {
+        userId: "12",
+        avatarImg: require("../assets/1.jpg"),
+        nickname: "王大锤"
+      },
+      {
+        userId: "12",
+        avatarImg: require("../assets/4.jpg"),
+        nickname: "王大锤"
+      },
+      {
+        userId: "12",
+        avatarImg: require("../assets/4.jpg"),
+        nickname: "王大锤"
+      },
+      {
+        userId: "12",
+        avatarImg: require("../assets/4.jpg"),
+        nickname: "王大锤"
+      }
+    ];
+  },
+  methods: {
+    changeStatus() {
+      this.showGroupManage = !this.showGroupManage;
     }
-    }
+  }
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.button-group{
-  position: absolute;
- margin: 90px 147px; 
- width: 120px;
- font-size: 15px;
-}
-.button-delet{
-  position: absolute;
- margin:0px 600px; 
- width: 110px;
- font-size: 12px;
- height: 30px;
-  vertical-align:middle;
-  text-align: center;
-   
-    display: -webkit-flex; /* webkit内核的浏览器 Safari */
-}
-.collapse-container {
-  /*box-shadow: 0 0px 8px 0 rgba(0, 0, 0, 0.06), 0 1px 0px 0 rgba(0, 0, 0, 0.02);*/
-  -webkit-border-radius: 5px;/*兼容谷歌浏览器*/
-  border-radius: 5px;/*圆角边框*/
-  -moz-border-radius: 5px;
-  background-clip: padding-box;
-  margin: 150px 150px 0px 150px;
+.container {
   width: 700px;
-  padding: 0px;
-  background: #fff;
+  margin: 60px auto;
 }
-.box {
+.el-collapse-item__header {
+  height: 70px !important;
+}
+.button-delet {
+  font-size: 12px;
+}
+
+.avatarBox {
   display: inline-block;
-  width: 180px;
-  height: 180px;
- 
+  margin: 10px 70px 20px 0;
 }
-.box3{
-  display: flex;
-}
-.box2 {
-   
-   display: flex;
-  width: 300px;
-  height: 350px;
-  margin: 20px 0px ;
-  border-left: 1px solid #cfcfcf;
-}
-.image {
+.avatarImg {
   width: 100px;
   height: 100px;
-  border-radius:70%;
+  border-radius: 50%;
 }
-.image2 {
-  width: 70px;
-  height: 70px;
-  border-radius:70%;
-margin: 110px 10px 0px 60px;
+.nickname {
+  text-align: center;
+  font-size: 1.2em;
+  font-weight: bold;
+  max-width: 100px;
 }
-span {position: relative;
-  display:block;
-  width: 100px;
-  height: 180px;
-  
- }
-span h3{width: 100px;bottom: 30px;text-align:center;}  
+
+/* 编辑框 */
+.editOut {
+  opacity: 0;
+  width: 97%;
+  height: 92%;
+  position: absolute;
+  bottom: 8px;
+  right: 2px;
+  transition: opacity 0.5s;
+  color: #fff;
+  font-size: 0.9em;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 50%;
+}
+.el-icon-delete {
+  display: inline-block;
+  position: absolute;
+  bottom: 39px;
+  left: 39px;
+  font-size: 20px;
+  cursor: pointer;
+}
+.editOut:hover {
+  opacity: 1;
+}
 </style>

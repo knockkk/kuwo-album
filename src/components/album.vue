@@ -17,8 +17,8 @@
         <template slot="title">
           <span style="font-size: 17px;">{{sort}}</span>
         </template>
-        <el-menu-item :index="`/album/albumSort/${1}`" @click="sort='已发布'">已发布</el-menu-item>
-        <el-menu-item :index="`/album/albumSort/${2}`" @click="sort='未发布'">未发布</el-menu-item>
+        <el-menu-item :index="`/album/albumSort/${1}`" @click="sort='已公开照片'">已公开照片</el-menu-item>
+        <el-menu-item :index="`/album/albumSort/${2}`" @click="sort='未公开照片'">未公开照片</el-menu-item>
         <el-menu-item :index="`/album/albumSort/${3}`" @click="sort='按点赞数排序'">按点赞数排序</el-menu-item>
       </el-submenu>
     </el-menu>

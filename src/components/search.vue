@@ -1,6 +1,6 @@
 <template>
-  <div id="friend-publish">
-    <h1>搜索</h1>
+  <div id="search">
+      <el-input v-model="input" placeholder="?????"></el-input>
   </div>
 </template>
 
