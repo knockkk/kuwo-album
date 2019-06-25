@@ -84,7 +84,7 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .container {
-  margin: 0 100px;
+  padding: 0 7%;
 }
 .editOut {
   opacity: 0;
@@ -120,18 +120,20 @@ export default {
   cursor: pointer;
   color: #f7b90a;
   font-size: 16px;
-  margin: 10px 0 10px 0;
+  margin: 10px 0 0 0.5%;
 }
 .albumBox {
   cursor: pointer;
   display: inline-block;
   width: 400px;
-  margin: 0 20px 20px 0;
   background-color: #fff;
+  margin: 15px 1%;
+  max-width: 27%;
 }
 .image {
   object-fit: cover;
   height: 240px;
   width: 400px;
+  max-width: 100%;
 }
 </style>

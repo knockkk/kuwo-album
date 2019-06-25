@@ -23,13 +23,13 @@
       style="position:relative; display:inline-block"
       @click="imageClick(index+1)"
     >
-      <div style="position:relative">
+      <img :src="item" alt="image" class="displayImg">
+      <!-- <div style="position:relative">
         <img :src="item" alt="image" class="displayImg">
         <div class="testout">
           <div class="testin">118人喜欢</div>
         </div>
-      </div>
-      <!-- <span class="typeText">{{item.type}}</span> -->
+      </div>-->
     </div>
   </el-main>
 </template>
@@ -95,15 +95,15 @@ export default {
 <style scoped>
 .testout {
   opacity: 0;
-  width:100%;
+  width: 100%;
   height: 100%;
   position: absolute;
-  right:0;
+  right: 0;
   top: 0;
   transition: opacity 0.5s;
 }
 .testout:hover {
-  opacity: 1.0;
+  opacity: 1;
 }
 .testin {
   position: absolute;
@@ -114,7 +114,6 @@ export default {
   background: rgba(0, 0, 0, 0.3);
   padding: 3px 6px;
 }
-
 
 .el-main {
   padding: 0 100px;

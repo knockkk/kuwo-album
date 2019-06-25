@@ -66,23 +66,12 @@ export default new Router({
           component: friendList
         },
         {
-          path: Url.loginPage,
-          component: login
-        },
-        {
-          path: Url.register,
-          component: register
-        },
-        {
-          path: Url.findPassword,
-          component: findPassword
-        },
-        {
           path: Url.publish,
           component: publish
         },
         {
           path: Url.search,
+          name: "search",
           component: search
         },
         {
@@ -109,6 +98,18 @@ export default new Router({
           path: Url.albumImages,
           name: "albumImages",
           component: albumImages
+        },
+        {
+          path: Url.loginPage,
+          component: login
+        },
+        {
+          path: Url.register,
+          component: register
+        },
+        {
+          path: Url.findPassword,
+          component: findPassword
         },
       ]
     }
