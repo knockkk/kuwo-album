@@ -28,9 +28,10 @@
             <el-input
               v-if="searchClickTime === 1"
               v-model="inputContent"
-              placeholder="输入用户名称"
+              placeholder="输入用户名"
               style="margin-right:20px"
               autofocus
+              @keyup.enter.native="searchClick"
             ></el-input>
             <i class="el-icon-search" style="color:#fff;" @click="searchClick"></i>
           </div>
@@ -46,7 +47,7 @@
               ></el-input>
               <i class="el-icon-search" style="color:#fff;" @click="searchClick"></i>
             </div>
-          </el-menu-item> -->
+          </el-menu-item>-->
 
           <el-menu-item :index="Url.loginPage" class="loginButton">登录</el-menu-item>
         </el-menu>
@@ -75,8 +76,14 @@ export default {
       clickTime = clickTime + 1;
       if (clickTime === 2) {
         //点击两次跳转
-        /* 跳转路由 */
+        this.$router.push({
+          name: "search",
+          params: {
+            content: this.inputContent
+          }
+        });
         clickTime = 0;
+        this.inputContent = ""
       }
       this.searchClickTime = clickTime;
     }

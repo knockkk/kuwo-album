@@ -71,6 +71,7 @@ export default new Router({
         },
         {
           path: Url.search,
+          name: "search",
           component: search
         },
         {
