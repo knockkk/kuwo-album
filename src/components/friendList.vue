@@ -2,7 +2,7 @@
 <template>
   <div class="container">
     <div style="text-align:right" @click.self="showGroupManage=false">
-      <el-button v-if="showGroupManage">新建分组</el-button>
+      <el-button v-if="showGroupManage" @click="addGroupDialogVisible = true">新建分组</el-button>
       <el-button type="primary" style="width:120px" @click.stop="changeStatus()">管理分组</el-button>
     </div>
 
@@ -13,11 +13,13 @@
             class="el-icon-remove"
             style="margin-right:10px;font-size:18px;color:red"
             v-if="showGroupManage && index!=0"
+            @click.stop="deleteClick(item.groupName)"
           ></i>
           <i
             class="el-icon-s-tools"
             style="margin-right:10px;font-size:18px;"
             v-if="showGroupManage && index==0"
+              @click.stop="deleteClick(item.groupName)"
           ></i>
           <div style="font-size:1.4em; font-weight:bold;margin:20px 0">{{item.groupName}}</div>
         </template>
@@ -34,6 +36,16 @@
         </div>
       </el-collapse-item>
     </el-collapse>
+
+    <!-- 添加相册dialog -->
+    <el-dialog title="新建分组" :visible.sync="addGroupDialogVisible" width="30%" center>
+      <span style="line-height:3 ">分组名称</span>
+      <el-input v-model="inputGroupName" autofocus></el-input>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="addGroupDialogVisible = false">取 消</el-button>
+        <el-button type="primary" @click="addGroupDialogVisible = false">确 定</el-button>
+      </span>
+    </el-dialog>
   </div>
 </template>
 
@@ -44,7 +56,9 @@ export default {
       activeName: 0 /* collapse组件绑定展开项 */,
       showGroupManage: false /* 展示管理分组 */,
       groupList: [],
-      groupFriendList: []
+      groupFriendList: [],
+      inputGroupName: "",
+      addGroupDialogVisible: false
     };
   },
   mounted() {
@@ -96,6 +110,36 @@ export default {
   methods: {
     changeStatus() {
       this.showGroupManage = !this.showGroupManage;
+    },
+    deleteClick(groupName) {
+      if (groupName === "我的好友") {
+        this.$message({
+          type: "info",
+          message: "默认分组无法删除"
+        });
+      } else {
+        this.$confirm(
+          "确认删除分组：" + groupName + "？（将同时删除该组内好友）",
+          "提示",
+          {
+            confirmButtonText: "确定",
+            cancelButtonText: "取消",
+            type: "warning"
+          }
+        )
+          .then(() => {
+            this.$message({
+              type: "success",
+              message: "删除成功!"
+            });
+          })
+          .catch(() => {
+            this.$message({
+              type: "info",
+              message: "已取消删除"
+            });
+          });
+      }
     }
   }
 };

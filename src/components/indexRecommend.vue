@@ -28,20 +28,21 @@
 
 <script>
 import { imageTypeList, Url } from "../config/index";
-import axios from "axios";
 export default {
   data() {
     return {
       imageTypeList: imageTypeList,
       imageType: null,
-      classifiedData: []
+      classifiedData: [],
     };
   },
   mounted() {
     console.log("reco mounted");
-    /* axios.get('http://192.168.137.1:8000/album/api/v1/popular').then(res => {
-      console.log(res)
-    }) */
+    this.$axios.get(Url.getRecommend).then(res => {
+      console.log(res.data)
+    }).catch(err => {
+      console.log("error",err)
+    })
     this.classifiedData = [
       {
         type: "人像",

@@ -1,23 +1,27 @@
 <template>
   <div id="friend-publish" class="container">
-    <div class="add">
+    <div class="add" @click="addAlbumDialogVisible = true">
       <i class="el-icon-circle-plus add"></i>
       <span>添加相册</span>
     </div>
 
     <div>
       <div
-        v-for="(item,index) in album"
+        v-for="(item,index) in albumList"
         :key="index"
         class="albumBox"
         @click="albumClick(item.albumId)"
       >
         <div style="position:relative">
           <img :src="item.image" alt="image" class="image">
-          <div class="editOut">
+          <div v-if="item.albumName != '我的相册'" class="editOut">
             <div class="editAlbumBox">
-              <div class="editItem" style="border-right:1.5px solid #fff">编辑</div>
-              <div class="editItem">删除</div>
+              <div
+                class="editItem"
+                style="border-right:1.5px solid #fff"
+                @click.stop="editAlbumDialogVisible = true"
+              >编辑</div>
+              <div class="editItem" @click.stop="deleteClick(item.albumName)">删除</div>
             </div>
           </div>
         </div>
@@ -28,6 +32,26 @@
         </div>
       </div>
     </div>
+
+    <!-- 添加相册dialog -->
+    <el-dialog title="新建相册" :visible.sync="addAlbumDialogVisible" width="30%" center>
+      <span style="line-height:3 ">相册名称</span>
+      <el-input v-model="inputAlbumName" autofocus></el-input>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="addAlbumDialogVisible = false">取 消</el-button>
+        <el-button type="primary" @click="addAlbumDialogVisible = false">确 定</el-button>
+      </span>
+    </el-dialog>
+
+    <!-- 编辑相册名称dialog -->
+    <el-dialog title="修改相册名称" :visible.sync="editAlbumDialogVisible" width="30%" center>
+      <span style="line-height:3 ">相册名称</span>
+      <el-input v-model="inputAlbumName" autofocus></el-input>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="editAlbumDialogVisible = false">取 消</el-button>
+        <el-button type="primary" @click="editAlbumDialogVisible = false">确 定</el-button>
+      </span>
+    </el-dialog>
   </div>
 </template>
 
@@ -36,12 +60,15 @@ import { Url } from "../config/index";
 export default {
   data() {
     return {
-      album: "",
-      Url: Url
+      albumList: "",
+      Url: Url,
+      inputAlbumName: "",
+      editAlbumDialogVisible: false, //编辑相册
+      addAlbumDialogVisible: false //添加相册
     };
   },
   mounted() {
-    this.album = [
+    this.albumList = [
       {
         albumName: "我的相册",
         albumId: "12",
@@ -76,6 +103,29 @@ export default {
           id: albumId
         }
       });
+    },
+    deleteClick(albumName) {
+      this.$confirm(
+        "确认删除相册：" + albumName + "？（将同时删除该相册内图片）",
+        "提示",
+        {
+          confirmButtonText: "确定",
+          cancelButtonText: "取消",
+          type: "warning"
+        }
+      )
+        .then(() => {
+          this.$message({
+            type: "success",
+            message: "删除成功!"
+          });
+        })
+        .catch(() => {
+          this.$message({
+            type: "info",
+            message: "已取消删除"
+          });
+        });
     }
   }
 };

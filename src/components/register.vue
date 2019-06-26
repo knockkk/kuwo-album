@@ -4,7 +4,6 @@
     :rules="rules"
     ref="formData"
     label-position="left"
-    label-width="0px"
     class="demo-ruleForm login-container"
   >
     <h3 class="title">Cool Wow Album</h3>
@@ -20,20 +19,22 @@
     </el-form-item>
 
     <el-form-item style="width:100%;">
-      <el-button type="primary" style="width:100%;">注册</el-button>
+      <el-button type="primary" style="width:100%;" @click="registerClick">注册</el-button>
     </el-form-item>
   </el-form>
 </template>
 
 <script>
+import { Url } from "../config/index";
 export default {
   data() {
     return {
       formData: {
         mailbox: "",
         account: "",
-        checkPass: ""
+        password: ""
       },
+      userId: 13,
       rules: {
         mailbox: [{ required: true, message: "请输入邮箱", trigger: "blur" }],
         account: [{ required: true, message: "请输入用户名", trigger: "blur" }],
@@ -42,9 +43,68 @@ export default {
     };
   },
   methods: {
+    /* 点击注册 */
     registerClick() {
-      console.log("login");
-      this.$router.push(Url.register);
+      // this.$router.push(Url.register);
+      if (!this.formData.mailbox) {
+        this.$message({
+          type: "error",
+          message: "请输入邮箱"
+        });
+      } else if (!this.formData.account) {
+        this.$message({
+          type: "error",
+          message: "请输入用户名"
+        });
+      }else if (!this.formData.password) {
+        this.$message({
+          type: "error",
+          message: "请输入密码"
+        });
+      }
+      else{
+        this.register();
+      }
+    },
+    register() {
+      let params = {
+        nickname: this.formData.account,
+        pwd: this.formData.password,
+        email: this.formData.mailbox
+      };
+      console.log("params:", params);
+      this.$axios
+        .post(Url.postRegister, params)
+        .then(res => {
+          console.log(res.data);
+          /* 用户名已被注册 */
+          console.log(res.data.code);
+          if (res.data.code === 10003) {
+            this.$message({
+              type: "error",
+              message: "用户名已被注册"
+            });
+          } else if (res.data.code === 10001) {
+            this.$message({
+              type: "error",
+              message: "邮箱格式错误"
+            });
+          } else if (res.data.code === 10002) {
+            this.$message({
+              type: "error",
+              message: "系统错误，请稍后重试"
+            });
+          } else {
+            /* 注册成功，将注册的用户名和id信息保存，自动登录 */
+          }
+        })
+        .catch(err => {
+          console.log("error", err);
+          this.$message({
+            type: "warn",
+            message: "请求失败，请重新尝试"
+          });
+        });
     }
   }
 };
@@ -67,8 +127,5 @@ export default {
   margin: 0px auto 40px auto;
   text-align: center;
   color: #505458;
-}
-.remember {
-  margin: 0px 0px 35px 0px;
 }
 </style>

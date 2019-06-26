@@ -24,7 +24,9 @@ let Url = {
   editPassword: "/user/editPassword", //修改密码
   editComment: "/user/editComment", //编辑评论
   //back-end
-  getIndexImage: baseUrl + "/album/api/v1/popular"
+  getRecommend: baseUrl + "/album/api/v1/popular", //首页推荐
+  postRegister: baseUrl + "/album/api/v1/register", //注册
+  postLogin: baseUrl + "/album/api/v1/login", //登录
 };
 
 const imageTypeList = [
