@@ -1,77 +1,45 @@
 <template>
   <el-container id="latest" class="popularContainer">
-      <el-main style="cursor:pointer;">
-        <div
-          v-for="item in latestData"
-          v-bind:key="item.like"
-          style="position:relative; display:inline-block"
+    <el-main style="cursor:pointer;">
+      <div
+        v-for="item in latestData"
+        v-bind:key="item.like"
+        style="position:relative; display:inline-block"
+      >
+        <img
+          :src="Url.imageSrc + item.ImageId"
+          alt="image"
+          class="displayImg"
+          @click="imageClick(item.ImageId)"
         >
-          <img :src="item.image" alt="image" class="displayImg" @click="imageClick(item.imageId)">
-          <span class="timeText">{{item.time}}</span>
-        </div>
-      </el-main>
-    </el-container>
+        <span class="timeText">{{item.time}}</span>
+      </div>
+    </el-main>
+  </el-container>
 </template>
 
 <script>
+import { Url } from "../config/index";
 export default {
   data() {
     return {
+      Url: Url,
       latestData: []
     };
   },
   mounted() {
-      this.latestData = [
-          {
-            image: require("../assets/5.jpg"),
-            imageId: 1,
-            time: "10分钟前"
-          },
-          {
-            image: require("../assets/2.jpg"),
-            imageId: 2,
-            time: "1小时前"
-          },
-          {
-            image: require("../assets/8.jpg"),
-            imageId: 3,
-            time: "3小时前"
-          },
-          {
-            image: require("../assets/1.jpg"),
-            imageId: 4,
-            time: "10小时前"
-          },
-          {
-            image: require("../assets/3.jpg"),
-            imageId: 5,
-            time: "1天前"
-          },
-          {
-            image: require("../assets/6.jpg"),
-            imageId: 6,
-            time: "1天前"
-          },
-          {
-            image: require("../assets/7.jpg"),
-            imageId: 7,
-            time: "1天前"
-          },
-          {
-            image: require("../assets/4.jpg"),
-            imageId: 8,
-            time: "1天前"
-          },
-          {
-            image: require("../assets/9.jpg"),
-            imageId: 9,
-            time: "2天前"
-          }
-        ];
-
+    this.$axios
+      .get(Url.getLatest)
+      .then(res => {
+        console.log(res.data);
+        this.latestData = res.data;
+      })
+      .catch(err => {
+        console.log("error", err);
+      });
   },
   methods: {
-      imageClick(imageId) {
+    imageClick(imageId) {
       this.$router.push({
         name: "imageDetail",
         params: {
@@ -92,6 +60,7 @@ export default {
 .displayImg {
   height: 300px;
   margin: 20px 20px;
+  max-width:600px;
 }
 .timeText {
   position: absolute;

@@ -21,20 +21,20 @@
       v-for="(item,index) in imageList"
       v-bind:key="index"
       style="position:relative; display:inline-block"
-      @click="imageClick(index+1)"
+      @click="imageClick(item.imageid)"
     >
       <!-- <img :src="item" alt="image" class="displayImg"> -->
       <div style="position:relative">
-        <img :src="item" alt="image" class="displayImg">
+        <img  :src="Url.imageSrc + item.imageid" alt="image" class="displayImg">
         <div class="out">
           <div class="userBox flex-row">
-            <img src="../assets/4.jpg" alt="头像" class="avatarImg">
-            <div style="color:#fff; font-size:0.9em">白日梦</div>
+            <img :src="Url.imageSrc + item.avatarimgid" alt="头像" class="avatarImg">
+            <div style="color:#fff; font-size:0.9em">{{item.nickname}}</div>
           </div>
 
           <span class="likeText">
             <img src="../assets/like.png" alt="喜欢" class="likeIcon">
-            12
+            {{item.like}}
           </span>
         </div>
       </div>
@@ -47,10 +47,10 @@ import { imageTypeList, Url } from "../config/index";
 export default {
   data() {
     return {
-      dataList: [],
+      Url:Url,
       imageList: [], //图片路径列表
       imageTypeId: null,
-      imageTypeList: []
+      imageTypeList: imageTypeList,
     };
   },
   watch: {
@@ -63,10 +63,10 @@ export default {
   },
   mounted() {
     this.imageTypeId = this.$route.params.id;
-    this.imageTypeList = imageTypeList;
     this.getImageList();
   },
   methods: {
+    /* 选择分类 */
     handleCommand(imageTypeId) {
       // this.$message("click on item " + command);
       this.imageTypeId = imageTypeId;
@@ -78,14 +78,16 @@ export default {
       });
     },
     getImageList() {
-      /* 请求类别图片 */
-      let imageList = [];
-      for (let i = 0; i < 6; i++) {
-        let id = this.imageTypeId + i;
-        id = (id % 9) + 1;
-        imageList.push(require("../assets/" + id + ".jpg"));
-      }
-      this.imageList = imageList;
+      this.$axios
+        .get(Url.getClassified + "?typeid=" + this.imageTypeId)
+        .then(res => {
+          console.log("请求某类别图片",res.data);
+          this.imageList = res.data;
+          console.log("this",this.imageList)
+        })
+        .catch(err => {
+          console.log("error", err);
+        });
     },
     imageClick(imageId) {
       this.$router.push({
@@ -107,6 +109,7 @@ export default {
 .displayImg {
   height: 300px;
   margin: 20px 20px;
+  max-width:600px;
 }
 .typeText {
   position: absolute;
@@ -117,7 +120,6 @@ export default {
   background: rgba(0, 0, 0, 0.3);
   padding: 3px 6px;
 }
-
 
 /* hover时出现补充信息 */
 .out {

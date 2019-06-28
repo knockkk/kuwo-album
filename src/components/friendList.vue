@@ -7,111 +7,98 @@
     </div>
 
     <el-collapse accordion v-model="activeName" style="margin-top:20px">
-      <el-collapse-item v-for="(item,index) in groupList" :key="index" :name="index">
+      <el-collapse-item v-for="(item,index1) in groupList" :key="index1" :name="index1">
         <template slot="title">
           <i
             class="el-icon-remove"
             style="margin-right:10px;font-size:18px;color:red"
-            v-if="showGroupManage && index!=0"
-            @click.stop="deleteClick(item.groupName)"
+            v-if="showGroupManage && index1!=0"
+            @click.stop="deleteClick(item.groupname, item.groupid)"
           ></i>
           <i
             class="el-icon-s-tools"
             style="margin-right:10px;font-size:18px;"
-            v-if="showGroupManage && index==0"
-              @click.stop="deleteClick(item.groupName)"
+            v-if="showGroupManage && index1==0"
+            @click.stop="deleteClick(item.groupname, item.groupid)"
           ></i>
-          <div style="font-size:1.4em; font-weight:bold;margin:20px 0">{{item.groupName}}</div>
+          <div style="font-size:1.4em; font-weight:bold;margin:20px 0">{{item.groupname}}</div>
         </template>
 
-        <div v-for="(item,index) in groupFriendList" :key="index" class="avatarBox">
-          <div style="position:relative">
-            <img :src="item.avatarImg" alt="avatar" class="avatarImg">
-            <div class="editOut">
-              <i class="el-icon-delete"></i>
+        <div v-for="(item2,index2) in groupFriendList[index1]" :key="index2" class="avatarBox">
+          <div v-if="item2">
+            <div style="position:relative">
+              <img :src="Url.imageSrc + item2.avaterimgid" alt="avatar" class="avatarImg">
+              <div class="editOut">
+                <i class="el-icon-delete"></i>
+              </div>
             </div>
-          </div>
 
-          <div class="nickname">{{item.nickname}}</div>
+            <div class="nickname">{{item2.nickname}}</div>
+          </div>
         </div>
       </el-collapse-item>
     </el-collapse>
 
-    <!-- 添加相册dialog -->
+    <!-- 新建分组dialog -->
     <el-dialog title="新建分组" :visible.sync="addGroupDialogVisible" width="30%" center>
       <span style="line-height:3 ">分组名称</span>
       <el-input v-model="inputGroupName" autofocus></el-input>
       <span slot="footer" class="dialog-footer">
         <el-button @click="addGroupDialogVisible = false">取 消</el-button>
-        <el-button type="primary" @click="addGroupDialogVisible = false">确 定</el-button>
+        <el-button type="primary" @click="addGroupClick">确 定</el-button>
       </span>
     </el-dialog>
   </div>
 </template>
 
 <script>
+import { Url } from "../config/index";
 export default {
   data() {
     return {
+      Url: Url,
       activeName: 0 /* collapse组件绑定展开项 */,
       showGroupManage: false /* 展示管理分组 */,
-      groupList: [],
-      groupFriendList: [],
+      groupList: [], //分组列表
+      groupFriendList: [], //各分组中好友信息列表
       inputGroupName: "",
       addGroupDialogVisible: false
     };
   },
   mounted() {
-    this.groupList = [
-      {
-        groupName: "我的好友",
-        groupId: "233",
-        count: 18
-      },
-      {
-        groupName: "拍照达人",
-        groupId: "23",
-        count: 9
-      }
-    ];
-    this.groupFriendList = [
-      {
-        userId: "12",
-        avatarImg: require("../assets/3.jpg"),
-        nickname: "王大锤"
-      },
-      {
-        userId: "12",
-        avatarImg: require("../assets/4.jpg"),
-        nickname: "王大锤"
-      },
-      {
-        userId: "12",
-        avatarImg: require("../assets/1.jpg"),
-        nickname: "王大锤"
-      },
-      {
-        userId: "12",
-        avatarImg: require("../assets/4.jpg"),
-        nickname: "王大锤"
-      },
-      {
-        userId: "12",
-        avatarImg: require("../assets/4.jpg"),
-        nickname: "王大锤"
-      },
-      {
-        userId: "12",
-        avatarImg: require("../assets/4.jpg"),
-        nickname: "王大锤"
-      }
-    ];
+    /* 请求分组信息 */
+    this.getData();
   },
   methods: {
+    /* 添加新分组 */
+    addGroupClick() {
+      // addGroupDialogVisible = true
+      let params = {
+        userid: this.$userId,
+        groupname: this.inputGroupName
+      };
+      this.$axios
+        .post(Url.addNewGroup, params)
+        .then(res => {
+          console.log("添加分组", res.data);
+          /* 隐藏dialog */
+          this.addGroupDialogVisible = false;
+          (this.inputGroupName = ""),
+            /* 更新信息 */
+            this.getData();
+          this.$message({
+            type: "success",
+            message: "新建分组成功!"
+          });
+        })
+        .catch(err => {
+          console.log("error", err);
+        });
+    },
     changeStatus() {
       this.showGroupManage = !this.showGroupManage;
     },
-    deleteClick(groupName) {
+    deleteClick(groupName, groupId) {
       if (groupName === "我的好友") {
         this.$message({
           type: "info",
@@ -126,20 +113,60 @@ export default {
             cancelButtonText: "取消",
             type: "warning"
           }
-        )
-          .then(() => {
-            this.$message({
-              type: "success",
-              message: "删除成功!"
+        ).then(() => {
+          /* 请求删除分组 */
+          let params = {
+            userid: this.$userId,
+            groupid: groupId
+          };
+          this.$axios
+            .post(Url.deleteGroup, params)
+            .then(res => {
+              console.log("删除分组", res.data);
+              /* 更新信息 */
+              this.getData();
+              this.$message({
+                type: "success",
+                message: "删除成功!"
+              });
+            })
+            .catch(err => {
+              console.log("error", err);
             });
+        });
+      }
+    },
+    async getData() {
+      await this.$axios
+        .get(Url.getGroupList + "?userid=" + this.$userId)
+        .then(res => {
+          console.log("分组列表", res.data);
+          this.groupList = res.data;
+          /* 继续请求分组中好友信息 */
+        })
+        .catch(err => {
+          console.log("error", err);
+        });
+
+      let groupList = this.groupList;
+      for (let i = 0; i < groupList.length; i++) {
+        await this.$axios
+          .get(
+            Url.getGroupMembers +
+              "?userid=" +
+              this.$userId +
+              "&groupid=" +
+              groupList[i].groupid
+          )
+          .then(res => {
+            console.log("分组好友信息", res.data);
+            this.groupFriendList.push(res.data);
           })
-          .catch(() => {
-            this.$message({
-              type: "info",
-              message: "已取消删除"
-            });
+          .catch(err => {
+            console.log("error", err);
           });
       }
+      console.log(this.groupFriendList);
     }
   }
 };

@@ -2,11 +2,16 @@
   <el-container id="popular" class="popularContainer">
     <el-main style="cursor:pointer;">
       <div
-        v-for="item in popularData"
-        v-bind:key="item.like"
+        v-for="(item, index) in popularData"
+        v-bind:key="index"
         style="position:relative; display:inline-block"
       >
-        <img :src="item.image" alt="image" class="displayImg" @click="imageClick(item.imageId)">
+        <img
+          :src="Url.imageSrc + item.imageid"
+          alt="image"
+          class="displayImg"
+          @click="imageClick(item.imageid)"
+        >
         <span class="likeText">
           <img src="../assets/like.png" alt="喜欢" class="likeIcon">
           {{item.like}}
@@ -17,64 +22,28 @@
 </template>
 
 <script>
+import { Url } from "../config/index";
 export default {
   data() {
     return {
+      Url: Url,
       popularData: []
     };
   },
   mounted() {
     /* 请求人气榜图片*/
-   this.popularData = [
-          {
-            image: require("../assets/5.jpg"),
-            imageId: 1,
-            like: 150
-          },
-          {
-            image: require("../assets/2.jpg"),
-            imageId: 2,
-            like: 123
-          },
-          {
-            image: require("../assets/8.jpg"),
-            imageId: 3,
-            like: 105
-          },
-          {
-            image: require("../assets/1.jpg"),
-            imageId: 4,
-            like: 90
-          },
-          {
-            image: require("../assets/3.jpg"),
-            imageId: 5,
-            like: 82
-          },
-          {
-            image: require("../assets/6.jpg"),
-            imageId: 6,
-            like: 75
-          },
-          {
-            image: require("../assets/7.jpg"),
-            imageId: 7,
-            like: 54
-          },
-          {
-            image: require("../assets/4.jpg"),
-            imageId: 8,
-            like: 50
-          },
-          {
-            image: require("../assets/9.jpg"),
-            imageId: 9,
-            like: 34
-          }
-        ]
+    this.$axios
+      .get(Url.getRanklist)
+      .then(res => {
+        console.log(res.data);
+        this.popularData = res.data;
+      })
+      .catch(err => {
+        console.log("error", err);
+      });
   },
   methods: {
-      imageClick(imageId) {
+    imageClick(imageId) {
       this.$router.push({
         name: "imageDetail",
         params: {
@@ -95,6 +64,7 @@ export default {
 .displayImg {
   height: 300px;
   margin: 20px 20px;
+  max-width:600px;
 }
 
 .likeText {

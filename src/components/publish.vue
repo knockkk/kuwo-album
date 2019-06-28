@@ -1,18 +1,18 @@
 <template>
   <div id="publish" class="flex-row container">
     <div class="addBox">
-      <publish-Add-Image></publish-Add-Image>
+      <publish-Add-Image ref="child"></publish-Add-Image>
     </div>
     <div class="detailBox">
       <label style="display:block; margin-bottom:10px">个人相册</label>
-      <el-select v-model="form.albumName" placeholder="我的相册（默认）" style="width:100%">
-        <el-option label="我的相册" value="my album"></el-option>
-        <el-option label="家人" value="shanghai"></el-option>
-        <el-option label="朋友" value="beijing"></el-option>
+      <el-select v-model="form.albumId" placeholder="我的相册（默认）" style="width:100%">
+        <el-option label="我的相册" value="1"></el-option>
+        <el-option label="家人" value="2"></el-option>
+        <el-option label="朋友" value="3"></el-option>
       </el-select>
 
       <label style="display:block; margin:20px 0 10px 0">描述</label>
-      <el-input v-model="form.name"  maxlength="20" show-word-limit placeholder="写写照片的简短描述吧~" style="width:100%"></el-input>
+      <el-input v-model="form.text"  maxlength="20" show-word-limit placeholder="写写照片的简短描述吧~" style="width:100%"></el-input>
 
       <div style="margin:20px 0">
         <label style="margin-right:10px">公开照片</label>
@@ -27,13 +27,13 @@
               v-for="(item,index) in imageTypeList"
               :key="index"
               :label="item"
-              :value="index"
+              :value="index + 1"
             ></el-option>
           </el-select>
         </div>
       </transition>
 
-      <el-button type="primary" class="publishBtn">上传图片</el-button>
+      <el-button type="primary" class="publishBtn" @click="uploadClick">上传图片</el-button>
     </div>
   </div>
 </template>
@@ -48,15 +48,20 @@ export default {
   data() {
     return {
       form: {
-        albumName: "",
-        title: "",
+        albumId: "",
+        text: "",
         public: false,
         imageType:"",
       },
       imageTypeList: imageTypeList //图片标签列表
     };
   },
-  methods: {}
+  methods: {
+    /* 上传 */
+    uploadClick(){
+      this.$refs.child.submitUpload(this.form);
+    }
+  }
 };
 </script>
 

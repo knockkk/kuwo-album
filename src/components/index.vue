@@ -35,7 +35,6 @@ export default {
     this.tabValue = pos >= 0? pos + 1 : 1;
   },
   mounted() {
-    
   },
   methods: {
     /* tab栏点击 */
